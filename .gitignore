@@ -1,0 +1,10 @@
+#environment variable
+*.env
+
+#backup data
+*data.json
+
+#ignore virtual envriornment folder
+env/
+venv/
+
