@@ -4,22 +4,20 @@ from django.conf import settings
 
 def send_subscription_confirmation_email(email):
 
-    subject = "We've Received Your Travel Inquiry ✈️ | Himani Tour & Travel"
+    subject = "Welcome to Himani Tour & Travel Newsletter ✈️ | Himani Tour & Travel"
 
     message = """
 Dear Traveler,
 
-Thank you for contacting Himani Tour & Travel.
+Thank you for subscribing to the Himani Tour & Travel newsletter.
 
-We have successfully received your travel inquiry.
+From now on, you'll receive travel updates, exclusive tour packages, special offers, travel tips, and the latest news from Himani Tour & Travel.
 
-Our travel experts are reviewing your request and will get back to you within 24 hours with the best travel options, pricing, and itinerary based on your requirements.
-
-If your inquiry is urgent, please feel free to contact us directly.
+If you have any questions or need assistance planning your next trip, feel free to contact us.
 
 Email: info@himanitourtravel.com
 
-Thank you for choosing Himani Tour & Travel.
+Thank you for being a part of the Himani Tour & Travel community.
 
 Best Regards,
 Himani Tour & Travel
@@ -31,14 +29,14 @@ Himani Tour & Travel
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Travel Inquiry Confirmation</title>
+<title>Newsletter Subscription Confirmation</title>
 </head>
 
 <body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
 
 <table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:40px 0;">
 <tr>
-<td align="center"> 
+<td align="center">
 
 <table width="650" cellpadding="0" cellspacing="0"
 style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);">
@@ -48,7 +46,7 @@ style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 2
 <td align="center" style="background:#111111;padding:35px;">
 
 <img
-src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=600"
+src="https://res.cloudinary.com/iyiqdcpr/image/upload/v1783761532/profile_logo_ghuymz.jpg"
 alt="Himani Tour & Travel"
 style="max-width:320px;width:100%;height:auto;">
 
@@ -60,7 +58,7 @@ style="max-width:320px;width:100%;height:auto;">
 <td style="padding:45px;">
 
 <h2 style="margin-top:0;color:#C9A227;font-size:30px;">
-Thank You for Your Inquiry! ✈️
+Welcome to Our Newsletter! ✈️
 </h2>
 
 <p style="font-size:16px;color:#555;line-height:1.8;">
@@ -68,27 +66,31 @@ Dear Traveler,
 </p>
 
 <p style="font-size:16px;color:#555;line-height:1.8;">
-Thank you for reaching out to <strong>Himani Tour & Travel</strong>.
-We've successfully received your travel inquiry.
+Thank you for subscribing to the <strong>Himani Tour & Travel</strong> newsletter.
 </p>
 
 <div style="background:#FFF8E8;border-left:5px solid #C9A227;padding:25px;border-radius:8px;margin:35px 0;">
 
 <h3 style="margin-top:0;color:#C9A227;">
-📌 What Happens Next?
+🎉 You're Successfully Subscribed!
 </h3>
 
 <p style="margin:0;color:#555;font-size:16px;line-height:1.8;">
-Our travel specialists are reviewing your request.
-<br><br>
-
-<strong>Within the next 24 hours</strong>, one of our travel experts will contact you with personalized travel options, package details, pricing, and answers to any questions you may have.
+From now on, you'll receive:
 </p>
+
+<ul style="color:#555;font-size:16px;line-height:2;margin-top:15px;padding-left:20px;">
+<li>Exclusive tour packages</li>
+<li>Special travel offers & discounts</li>
+<li>Latest travel updates</li>
+<li>Helpful travel tips</li>
+<li>News from Himani Tour & Travel</li>
+</ul>
 
 </div>
 
 <p style="font-size:16px;color:#555;line-height:1.8;">
-Need immediate assistance?
+If you have any questions or need assistance planning your next trip, feel free to contact us anytime.
 </p>
 
 <p style="font-size:16px;">
@@ -97,6 +99,15 @@ Need immediate assistance?
 style="color:#C9A227;text-decoration:none;font-weight:bold;">
 info@himanitourtravel.com
 </a>
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+Thank you for being a part of the Himani Tour & Travel community.
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+Best Regards,<br>
+<strong>Himani Tour & Travel</strong>
 </p>
 
 </td>
@@ -236,7 +247,7 @@ style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 2
 <td align="center" style="background:#111111;padding:35px;">
 
 <img
-src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=900"
+src="https://res.cloudinary.com/iyiqdcpr/image/upload/v1783761532/web_logo_exgxhk.jpg"
 alt="Himani Tour & Travel"
 style="max-width:320px;width:100%;height:auto;">
 

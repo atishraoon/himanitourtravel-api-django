@@ -19,7 +19,7 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 load_dotenv(os.path.join(BASE_DIR, 'core' ,'.env'))
- 
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -28,11 +28,11 @@ load_dotenv(os.path.join(BASE_DIR, 'core' ,'.env'))
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True 
+DEBUG = False
 
 ALLOWED_HOSTS = ['*','127.0.0.1','himanitourtravel.pythonanywhere.com']
 
- 
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -45,7 +45,7 @@ INSTALLED_APPS = [
 
     'rest_framework',
     'corsheaders',
-    
+
     'api.apps.ApiConfig',
 
 ]
@@ -148,7 +148,7 @@ STATICFILES_DIRS = [
 ]
 
 # The URL to use when referring to static files
-STATIC_URL = '/static/' 
+STATIC_URL = '/static/'
 
 
 MEDIA_URL = '/media/'
@@ -162,7 +162,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
-    "http://127.0.0.1:8080", 
+    "http://127.0.0.1:8080",
 ]
 
 
