@@ -53,3 +53,19 @@ class TravelInquiryAdmin(admin.ModelAdmin):
         return response
 
     export_as_csv.short_description = "Export selected inquiries to CSV"
+
+
+
+@admin.register(PackagePayment)
+class PackagePaymentAdmin(admin.ModelAdmin):
+    list_display = (
+        "full_name",
+        "email",
+        "total_package_amount",
+        "current_amount_to_pay",
+        "previous_amount_paid",
+        "status",
+        "created_at",
+    )
+    list_filter = ("status",)
+    search_fields = ("full_name", "email")

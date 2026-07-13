@@ -10,8 +10,43 @@ from django.core.validators import validate_email
 from django.core.exceptions import ValidationError
 from django.http import JsonResponse
 from rest_framework import generics
+from rest_framework import status as http_status
 from .utils import send_subscription_confirmation_email , send_travel_inquiry_confirmation_email
 
+
+class PackageLookupAPIView(APIView):
+    """
+    POST /api/package-lookup/
+    Body: { "full_name": "John Doe", "email": "john@example.com" }
+
+    Returns the package_detail, total_package_amount, current_amount_to_pay,
+    previous_amount_paid and status for that person.
+    """
+
+    def post(self, request):
+        req_serializer = PackageLookupRequestSerializer(data=request.data)
+        req_serializer.is_valid(raise_exception=True)
+
+        full_name = req_serializer.validated_data["full_name"]
+        email = req_serializer.validated_data["email"]
+
+        # case-insensitive match on both fields, latest record first
+        record = (
+            PackagePayment.objects.filter(
+                full_name__iexact=full_name, email__iexact=email
+            )
+            .order_by("-created_at")
+            .first()
+        )
+
+        if not record:
+            return Response(
+                {"detail": "No matching package found for this name and email."},
+                status=http_status.HTTP_404_NOT_FOUND,
+            )
+
+        data = PackagePaymentDetailSerializer(record).data
+        return Response(data, status=http_status.HTTP_200_OK)
  
 class DestinationListAPIView(generics.ListAPIView):
     queryset = Destination.objects.all()

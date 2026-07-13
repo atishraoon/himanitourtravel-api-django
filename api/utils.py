@@ -395,3 +395,230 @@ style="color:#C9A227;text-decoration:none;">
     )
 
 
+
+def send_payment_success_email(package, amount_paid):
+    """
+    Sends a branded payment confirmation email after a successful
+    Razorpay payment, matching the Himani Tour & Travel newsletter style.
+
+    package      : PackagePayment instance (already updated/saved)
+    amount_paid  : Decimal - the amount paid in THIS transaction
+                   (pass this in before current_amount_to_pay gets
+                   overwritten in _mark_package_paid)
+    """
+
+    subject = "Payment Received ✅ | Himani Tour & Travel"
+
+    if package.status == "complete":
+        status_text = "Your package is now fully paid. No further payments are due. 🎉"
+        balance_line = ""
+    else:
+        status_text = "We've recorded this installment against your package."
+        balance_line = (
+            f"\nRemaining balance: Rs. {package.current_amount_to_pay} "
+            f"out of Rs. {package.total_package_amount} total.\n"
+        )
+
+    message = f"""
+Dear {package.full_name},
+
+We've received your payment of Rs. {amount_paid} for:
+{package.package_detail}
+
+{status_text}
+{balance_line}
+Payment ID: {package.razorpay_payment_id}
+
+If you have any questions, feel free to contact us.
+
+Email: info@himanitourtravel.com
+
+Thank you for choosing Himani Tour & Travel.
+
+Best Regards,
+Himani Tour & Travel
+"""
+
+    if package.status == "complete":
+        status_html_block = """
+<div style="background:#EAF7EE;border-left:5px solid #2E9E4E;padding:25px;border-radius:8px;margin:35px 0;">
+<h3 style="margin-top:0;color:#2E9E4E;">🎉 Fully Paid!</h3>
+<p style="margin:0;color:#555;font-size:16px;line-height:1.8;">
+Your package is now fully paid. No further payments are due.
+</p>
+</div>
+"""
+    else:
+        status_html_block = f"""
+<div style="background:#FFF8E8;border-left:5px solid #C9A227;padding:25px;border-radius:8px;margin:35px 0;">
+<h3 style="margin-top:0;color:#C9A227;">Installment Received</h3>
+<p style="margin:0;color:#555;font-size:16px;line-height:1.8;">
+Remaining balance: <strong>Rs. {package.current_amount_to_pay}</strong>
+out of <strong>Rs. {package.total_package_amount}</strong> total.
+</p>
+</div>
+"""
+
+    html_message = f"""
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Payment Confirmation</title>
+</head>
+
+<body style="margin:0;padding:0;background:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="100%" cellpadding="0" cellspacing="0" style="background:#f4f4f4;padding:40px 0;">
+<tr>
+<td align="center">
+
+<table width="650" cellpadding="0" cellspacing="0"
+style="background:#ffffff;border-radius:12px;overflow:hidden;box-shadow:0 10px 25px rgba(0,0,0,.08);">
+
+<!-- Header -->
+<tr>
+<td align="center" style="background:#111111;padding:35px;">
+
+<img
+src="https://res.cloudinary.com/iyiqdcpr/image/upload/v1783761532/profile_logo_ghuymz.jpg"
+alt="Himani Tour & Travel"
+style="max-width:320px;width:100%;height:auto;">
+
+</td>
+</tr>
+
+<!-- Content -->
+<tr>
+<td style="padding:45px;">
+
+<h2 style="margin-top:0;color:#C9A227;font-size:30px;">
+Payment Received ✅
+</h2>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+Dear {package.full_name},
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+We've received your payment of <strong>Rs. {amount_paid}</strong> for:<br>
+<strong>{package.package_detail}</strong>
+</p>
+
+{status_html_block}
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+<strong>Payment ID:</strong> {package.razorpay_payment_id}
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+If you have any questions or need assistance, feel free to contact us anytime.
+</p>
+
+<p style="font-size:16px;">
+📧
+<a href="mailto:info@himanitourtravel.com"
+style="color:#C9A227;text-decoration:none;font-weight:bold;">
+info@himanitourtravel.com
+</a>
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+Thank you for choosing Himani Tour & Travel.
+</p>
+
+<p style="font-size:16px;color:#555;line-height:1.8;">
+Best Regards,<br>
+<strong>Himani Tour & Travel</strong>
+</p>
+
+</td>
+</tr>
+
+<!-- Social -->
+
+<tr>
+<td align="center" style="padding:0 40px 40px;">
+
+<h3 style="color:#222;margin-bottom:20px;">
+Follow Us
+</h3>
+
+<a href="https://www.facebook.com/profile.php?id=61591582268690"
+style="display:inline-block;margin:6px;padding:12px 22px;background:#1877F2;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;">
+Facebook
+</a>
+
+<a href="https://www.instagram.com/himanitourtravel/"
+style="display:inline-block;margin:6px;padding:12px 22px;background:#E1306C;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;">
+Instagram
+</a>
+
+<a href="https://x.com/himanitour"
+style="display:inline-block;margin:6px;padding:12px 22px;background:#000;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;">
+X
+</a>
+
+<a href="https://www.youtube.com/@himanitourtravels"
+style="display:inline-block;margin:6px;padding:12px 22px;background:#FF0000;color:#fff;text-decoration:none;border-radius:5px;font-weight:bold;">
+YouTube
+</a>
+
+</td>
+</tr>
+
+<!-- Footer -->
+
+<tr>
+<td style="background:#111111;padding:35px;text-align:center;">
+
+<h2 style="margin:0;color:#C9A227;">
+Himani Tour & Travel
+</h2>
+
+<p style="margin:15px 0;color:#dddddd;font-size:15px;line-height:1.8;">
+Creating unforgettable journeys with trusted travel experiences across Himachal Pradesh and beyond.
+</p>
+
+<p style="margin:8px 0;">
+<a href="mailto:info@himanitourtravel.com"
+style="color:#C9A227;text-decoration:none;">
+📧 info@himanitourtravel.com
+</a>
+</p>
+
+<p style="margin-top:30px;color:#888;font-size:12px;">
+© 2026 Himani Tour & Travel. All Rights Reserved.
+</p>
+
+</td>
+</tr>
+
+</table>
+
+</td>
+</tr>
+</table>
+
+</body>
+</html>
+"""
+
+    try:
+        send_mail(
+            subject=subject,
+            message=message,
+            from_email=settings.DEFAULT_FROM_EMAIL,
+            recipient_list=[package.email],
+            html_message=html_message,
+            fail_silently=False,
+        )
+        return True
+    except Exception as e:
+        # Don't let an email failure break the payment flow - just log it.
+        # Swap this print for proper logging (Python's logging module,
+        # Sentry, etc.) in production.
+        print(f"[send_payment_success_email] Failed to send email to "
+              f"{package.email}: {e}")
+        return False
