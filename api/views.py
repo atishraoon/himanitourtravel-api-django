@@ -99,7 +99,7 @@ Message:
 {inquiry.message}  
 """,
             from_email=settings.DEFAULT_FROM_EMAIL,
-            recipient_list=["himanitourstravel@gmail.com"],  # Replace with your business email
+            recipient_list=["noreply@himanitourtravel.com"],  # Replace with your business email
             fail_silently=False,
         )
 
