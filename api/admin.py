@@ -2,7 +2,11 @@ from django.contrib import admin
 from .models import *
 import csv
 from django.http import HttpResponse
-# Register your models here.
+
+
+admin.site.site_header = "Himani Tour & Travel Admin"
+admin.site.site_title = "Himani Tour & Travel"
+admin.site.index_title = "Welcome to Himani Tour & Travel Dashboard"
 
 admin.site.register(Subscriber)
 admin.site.register(Destination)
