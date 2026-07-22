@@ -30,7 +30,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get("DEBUG") == "True"  
 
-ALLOWED_HOSTS = ['*','127.0.0.1','himanitourtravel.pythonanywhere.com']
+ALLOWED_HOSTS = ['*','127.0.0.1','himanitourtravel.pythonanywhere.com','himanitourtravel.onrender.com']
 
 
 # Application definition
@@ -161,7 +161,7 @@ CORS_ALLOW_ALL_ORIGINS = True
 
 CORS_ALLOWED_ORIGINS = [
     "http://127.0.0.1:8080",
-    ".render.com",
+    "https://himanitourtravel.onrender.com/",
 ]
 
 
